@@ -1,5 +1,5 @@
 def pour(jug1, jug2):
-    max1, max2, fill = 3, 4, 2  #Change maximum capacity and final capacity
+    max1, max2, fill = 3, 4, 2  
     print("%d\t%d" % (jug1, jug2))
     if jug2 is fill:
         return
