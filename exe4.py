@@ -21,5 +21,5 @@ def solve_cryptarithmetic(puzzle):
     print("No solution found")
 
 # Example usage:
-puzzle = ["SEND", "MORE", "MONEY"]
+puzzle = ["TWO", "TWO", "FOUR"]
 solve_cryptarithmetic(puzzle)
