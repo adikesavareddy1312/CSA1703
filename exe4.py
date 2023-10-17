@@ -1,22 +1,25 @@
 from itertools import permutations
 
 def solve_cryptarithmetic(puzzle):
-    words = puzzle.split()
-    letters = set("".join(words))
-
+    letters = set("".join(puzzle))
     if len(letters) > 10:
-        return "Too many unique letters"
+        print("Invalid input: Too many unique letters")
+        return
 
-    digit_permutations = permutations("0123456789", len(letters))
+    for perm in permutations("0123456789", len(letters)):
+        mapping = dict(zip(letters, perm))
+        if all(mapping[word[0]] != '0' for word in puzzle):
+            num1 = int(''.join(mapping[c] for c in puzzle[0]))
+            num2 = int(''.join(mapping[c] for c in puzzle[1]))
+            result = int(''.join(mapping[c] for c in puzzle[2]))
+            if num1 + num2 == result:
+                print("Solution found:")
+                for word in puzzle:
+                    print(word, '=', ''.join(mapping[c] for c in word))
+                return
 
-    for perm in digit_permutations:
-        digit_map = dict(zip(letters, perm))
-        if all(int("".join([digit_map[c] for c in word])) for word in words):
-            solution = " ".join([word.translate(str.maketrans(digit_map)) for word in words])
-            return solution
+    print("No solution found")
 
-    return "No solution found"
-puzzle = "SEND + MORE = MONEY"
-print("SEND + MORE = MONEY")
-solution = solve_cryptarithmetic(puzzle)
-print(solution)
+# Example usage:
+puzzle = ["SEND", "MORE", "MONEY"]
+solve_cryptarithmetic(puzzle)
